@@ -6,7 +6,6 @@
             No Tweets Yet.
         </p>
     @endforelse
-
     {{ $tweets->links() }}
 </div>
 

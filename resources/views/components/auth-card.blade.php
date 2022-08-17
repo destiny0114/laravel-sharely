@@ -1,6 +1,6 @@
 <div class="min-h-screen flex bg-gray-100">
     <section class="w-1/3 select-none">
-        <img class="object-cover w-full h-full" src="https://source.unsplash.com/random/?aesthetic" alt="picture">
+        <img class="object-cover w-full h-screen" src="https://source.unsplash.com/random/?aesthetic" alt="picture">
     </section>
 
     <section class="flex-1 self-center">

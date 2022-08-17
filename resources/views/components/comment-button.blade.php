@@ -1,8 +1,8 @@
-<form action="" method="post">
-    @csrf
-    <button type="submit"
-            class="font-bold text-gray-500 w-full p-2 hover:bg-gray-100 rounded-lg hover:ease-in-out transition  duration-200">
-        <i class="inline-block w-5 h-5 align-middle">
+@props(['link', 'comments_count' => null])
+
+<a href="{{ $link }}">
+    <div class="font-bold text-gray-500 flex justify-center items-center w-full p-2 hover:bg-gray-100 rounded-lg hover:ease-in-out transition duration-200">
+        <i class="w-5 h-5 mr-2">
             <svg height="20" version="1.1" viewBox="0 0 48 48" width="20" xml:space="preserve"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g
                     id="Expanded">
@@ -23,6 +23,11 @@
                     </g>
                 </g></svg>
         </i>
-        <span class="inline-block align-middle">Comment</span>
-    </button>
-</form>
+        <div class="flex items-center">
+            <span>Comment</span>
+            @unless($comments_count < 1)
+                <span class="ml-2 flex items-center justify-center w-6 h-6 bg-red-400 font-bold text-white rounded-full">{{ $comments_count }}</span>
+            @endunless
+        </div>
+    </div>
+</a>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\ListsController;
 use App\Http\Controllers\LikeController;
@@ -27,8 +28,10 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/tweets', TweetsController::class)->name('home');
     Route::post('/tweets', [TweetsController::class, 'store']);
+    Route::get('/tweets/{tweet:id}', [TweetsController::class, 'show'])->name('tweet');
 
     Route::post('/tweets/{tweet:id}/like', [LikeController::class, 'store'])->name('like');
+    Route::post('/tweets/{tweet:id}/comment', [CommentsController::class, 'store'])->name('comment');
 
     Route::get('/profiles/{user:username}', [ProfilesController::class, 'show'])->name('profile');
     Route::get('/profiles/{user:username}/edit', [ProfilesController::class, 'edit'])->can('edit_profile', 'user')->name('edit_profile');

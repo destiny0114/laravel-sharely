@@ -5,7 +5,7 @@
                 @include ('layouts.sidebar')
             </div>
 
-            <div class="lg:flex-1 bg-slate-100 overflow-y-auto">
+            <div class="lg:flex-1 bg-slate-50 overflow-y-auto">
                 <div class="w-full flex justify-between lg:px-4 py-4">
                     <div class="flex-1 lg:mx-14 lg:mb-10">
                         {{ $slot }}

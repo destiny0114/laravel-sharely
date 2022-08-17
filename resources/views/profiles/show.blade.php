@@ -49,7 +49,7 @@
     <div class="mb-6 py-4 px-6 bg-white shadow-md rounded-lg">
         <h2 class='font-bold text-2xl'>Intro</h2>
         <hr class='my-3'/>
-        <p class='text-sm font-normal whitespace-pre-wrap'>{{ $user->bio ?? "Try describe yourself." }}</p>
+        <p class='text-sm font-normal whitespace-pre-wrap'>{{ $user->bio ?? "No description." }}</p>
     </div>
 
     @include('layouts.timeline', [

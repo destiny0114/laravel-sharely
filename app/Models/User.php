@@ -3,21 +3,19 @@
 namespace App\Models;
 
 use App\Traits\Followable;
+use App\Traits\Mediable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, Followable;
+    use HasApiTokens, HasFactory, Notifiable, Followable, Mediable;
 
     /**
      * The attributes that are mass assignable.
@@ -62,6 +60,14 @@ class User extends Authenticatable
         return Attribute::set(fn($value) => Hash::make($value));
     }
 
+    protected function getBioAttribute()
+    {
+        if ($this->can("edit_profile", auth()->user())) {
+            return $this->bio ?? "Try describe yourself.";
+        }
+        return $this->bio ?? null;
+    }
+
     protected function getAvatarAttribute()
     {
         return $this->filterImage('avatar') ?? '/images/default_avatar.png';
@@ -70,36 +76,6 @@ class User extends Authenticatable
     protected function getCoverAttribute()
     {
         return $this->filterImage('cover')  ?? 'https://source.unsplash.com/random';
-    }
-
-    public function storeImage(UploadedFile $file, string $directory, string $type)
-    {
-        $image_path = $file->store($directory);
-
-        $media = new Media([
-            'url' => $image_path,
-            'file_path' => $image_path,
-            'type' => $type
-        ]);
-
-        $image = $this->findImageType($type);
-
-        if ($image) {
-            Storage::delete($image->file_path);
-            return $image->update($media->getAttributes());
-        }
-        return $this->images()->save($media);
-    }
-
-    protected function filterImage(string $type)
-    {
-        $image = $this->findImageType($type);
-        return $image ? $image->url : null;
-    }
-
-    protected function findImageType(string $type)
-    {
-        return $this->images()->where('type', $type)->first();
     }
 
     public function timeline()

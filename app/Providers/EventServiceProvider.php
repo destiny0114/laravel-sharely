@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\Commented;
 use App\Events\Followed;
+use App\Listeners\SendCommentedNotification;
 use App\Listeners\SendFollowedNotification;
 use App\Listeners\SendRegisteredNotification;
 use Illuminate\Auth\Events\Registered;
@@ -24,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         Followed::class => [
             SendFollowedNotification::class
+        ],
+        Commented::class => [
+            SendCommentedNotification::class
         ]
     ];
 

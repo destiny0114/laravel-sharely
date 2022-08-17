@@ -28,11 +28,6 @@
         </x-nav-link>
     </li>
     <li class="mb-4 block">
-        <x-nav-link :href="'/more'" :active="request()->routeIs('more')">
-            {{ __('More') }}
-        </x-nav-link>
-    </li>
-    <li class="mb-4 block">
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 

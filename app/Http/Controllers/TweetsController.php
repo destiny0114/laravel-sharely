@@ -15,15 +15,29 @@ class TweetsController extends Controller
         ]);
     }
 
-    public function store(Tweet $tweet)
+    public function show(Tweet $tweet)
     {
-        $attribute = request()->validate([
-            'body' => 'required|max:255'
+        return view('tweets.show', [
+            'tweet' => $tweet->setRelation("comments", $tweet->comments()->paginate(10))
         ]);
-        $tweet->create([
-            'user_id' => request()->user()->id,
-            'body' => $attribute['body']
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'body' => ['required', 'max:255'],
+            'media' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
+
+       $tweet = Tweet::create([
+            'user_id' => $request->user()->id,
+            'body' => $request->body
+        ]);
+
+        if ($request->file("media")) {
+            $tweet->storeImage($request->file("media"), 'tweets', 'tweet');
+        }
+
         return redirect()->route('home')->withFragment('timeline');
     }
 }

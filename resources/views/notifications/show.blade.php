@@ -19,7 +19,11 @@
                             </h5>
                             <small class='font-bold text-black/30'>{{ $notification->created_at->diffForHumans() }}</small>
                         </div>
-                        <p class="text-sm text-gray-600">{{ $notification->data['body'] }}</p>
+                        @if(isset($notification->data['tweet_id']))
+                            <p class="text-sm text-gray-600">{{ $notification->data['body'] }} <a href="{{ route('tweet', $notification->data['tweet_id']) }}">Click here.</a></p>
+                        @else
+                            <p class="text-sm text-gray-600">{{ $notification->data['body'] }}</p>
+                        @endif
                     </div>
                 </div>
                 @unless($loop->last)

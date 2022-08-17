@@ -27,6 +27,6 @@ class SendFollowedNotification
      */
     public function handle(Followed $event)
     {
-        return auth()->user()->notify(new UserFollowed($event->followed_user));
+        return $event->followed_user->notify(new UserFollowed(auth()->user()));
     }
 }

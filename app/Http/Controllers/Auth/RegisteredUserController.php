@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
         ]);
 
         if ($request->file('avatar')) {
-            $user->storeImage($request->file('avatar'), 'avatars','avatar');
+            $user->storeImage($request->file('avatar'), 'avatars', 'avatar');
         }
 
         event(new Registered($user));
