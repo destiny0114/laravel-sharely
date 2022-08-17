@@ -1,0 +1,70 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    volumes:
+      - ./:/var/www
+      - ./public:/var/www/public
+    depends_on:
+      - database
+      - redis
+      - mailhog
+    networks:
+      - sharely
+  webserver:
+    image: arm64v8/nginx:alpine
+    restart: always
+    ports:
+      - "8000:80"
+      - "8143:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/:rw
+    depends_on:
+      - app
+    networks:
+      - sharely
+  # mysql
+  database:
+    image: arm64v8/mysql:8
+    restart: always
+    networks:
+      - sharely
+    ports:
+      - 3306:3306
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      # root reserved
+      # MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+  # redis
+  redis:
+    image: arm64v8/redis:alpine
+    command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
+    restart: always
+    networks:
+      - sharely
+    ports:
+      - 6379:6379
+  # mailhog
+  mailhog:
+    image: mailhog/mailhog
+    restart: always
+    platform: linux/amd64
+    networks:
+      - sharely
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+volumes:
+  db_data:
+
+networks:
+  sharely:
+    driver: bridge
