@@ -48,11 +48,5 @@ RUN chown -R www:www .
 
 USER www
 
-RUN composer install && yarn install
-RUN yarn build
-
-RUN php artisan key:generate
-RUN php artisan optimize
-
 EXPOSE 9000
 CMD [ "php-fpm" ]
