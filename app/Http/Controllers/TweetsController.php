@@ -11,7 +11,7 @@ class TweetsController extends Controller
     public function __invoke(Request $request)
     {
         return view('tweets.index', [
-            'tweets' => $request->user()->timeline(),
+            'tweets' => auth()->user()->timeline(),
         ]);
     }
 
@@ -35,7 +35,7 @@ class TweetsController extends Controller
         ]);
 
         if ($request->file("media")) {
-            $tweet->storeImage($request->file("media"), 'tweets', 'tweet');
+            $tweet->storeImage($request->file("media"), 'medias', 'tweet');
         }
 
         return redirect()->route('home')->withFragment('timeline');

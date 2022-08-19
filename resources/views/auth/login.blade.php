@@ -2,7 +2,7 @@
     <x-auth-card>
         <div class="flex justify-center my-4">
             <a href="/" class="">
-                <img class="inline-block" src="/images/banner.png" alt="banner">
+                <img class="inline-block" src="{{ asset("/images/banner.png") }}" alt="banner">
             </a>
         </div>
 

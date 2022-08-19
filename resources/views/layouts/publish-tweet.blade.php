@@ -6,7 +6,7 @@
     </div>
 
     <div class='flex-1 relative'>
-        <form method='POST' action="/tweets" enctype="multipart/form-data">
+        <form method='POST' action="{{ route("create_tweet") }}" enctype="multipart/form-data">
             @csrf
             <textarea name="body" placeholder="What's happening?"
                 class='p-2 w-full border-none resize-none bg-gray-50 ring-1 ring-slate-900/10 shadow-sm rounded-md'

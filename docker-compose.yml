@@ -1,18 +1,20 @@
 version: '3.8'
 services:
+  # php
   app:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
     volumes:
-      - ./:/var/www
-      - ./public:/var/www/public
+        - .:/var/www
+        - ./public:/var/www/public
     depends_on:
       - database
       - redis
       - mailhog
     networks:
       - sharely
+  # nginx
   webserver:
     image: arm64v8/nginx:alpine
     restart: always
@@ -20,7 +22,7 @@ services:
       - "8000:80"
       - "8143:443"
     volumes:
-      - ./:/var/www
+      - .:/var/www
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/:rw
     depends_on:
       - app

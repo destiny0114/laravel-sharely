@@ -34,21 +34,25 @@ RUN pecl install redis \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /var/www
 COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
 
-WORKDIR /var/www
-
-COPY . /var/www
 COPY composer.lock composer.json /var/www/
 
-RUN chown -R www-data:www-data \
-    /var/www/storage \
-    /var/www/bootstrap/cache
+RUN groupadd -g 1000 www
+RUN useradd -u 1000 -ms /bin/bash -g www www
 
-RUN composer install \
-    && yarn install
+COPY . /var/www
+
+RUN chown -R www:www .
+
+USER www
+
+RUN composer install && yarn install
+RUN yarn build
 
 RUN php artisan key:generate
+RUN php artisan optimize
 
 EXPOSE 9000
 CMD [ "php-fpm" ]

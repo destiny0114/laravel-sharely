@@ -13,7 +13,12 @@ export default defineConfig({
             'resources/js/app.js',
         ]),
     ],
-    server: detectServerConfig(host),
+    server: {
+        host: "0.0.0.0",
+        hmr: {
+            clientPort: 80
+        }
+    },
 });
 
 function detectServerConfig(host) {

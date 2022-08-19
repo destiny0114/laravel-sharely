@@ -27,7 +27,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/tweets', TweetsController::class)->name('home');
-    Route::post('/tweets', [TweetsController::class, 'store']);
+
+    Route::post('/tweets', [TweetsController::class, 'store'])->name('create_tweet');
     Route::get('/tweets/{tweet:id}', [TweetsController::class, 'show'])->name('tweet');
 
     Route::post('/tweets/{tweet:id}/like', [LikeController::class, 'store'])->name('like');

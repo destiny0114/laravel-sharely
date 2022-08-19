@@ -1,12 +1,11 @@
 .git
 .vscode
 .gitignore
+**/.gitignore
 Makefile
 README.md
 node_modules
 vendor
-.env
-.env.backup
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -14,3 +13,5 @@ npm-debug.log
 yarn-error.log
 .idea
 .DS_Store
+docker-compose.yml
+LICENSE
