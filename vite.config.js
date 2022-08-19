@@ -4,7 +4,7 @@ import {resolve} from 'path';
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
-const host = "sharely-2.0.test";
+const host = "laravel-sharely.test";
 
 export default defineConfig({
     plugins: [
@@ -13,12 +13,7 @@ export default defineConfig({
             'resources/js/app.js',
         ]),
     ],
-    server: {
-        host: "0.0.0.0",
-        hmr: {
-            clientPort: 80
-        }
-    },
+    server: detectServerConfig(host)
 });
 
 function detectServerConfig(host) {
