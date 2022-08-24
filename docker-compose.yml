@@ -2,6 +2,7 @@ version: '3.8'
 services:
   # php
   app:
+    container_name: app
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
@@ -16,6 +17,7 @@ services:
       - sharely
   # nginx
   webserver:
+    container_name: webserver
     image: arm64v8/nginx:alpine
     restart: always
     ports:
@@ -30,6 +32,7 @@ services:
       - sharely
   # mysql
   database:
+    container_name: mysql
     image: arm64v8/mysql:8
     restart: always
     networks:
@@ -46,6 +49,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
   # redis
   redis:
+    container_name: redis
     image: arm64v8/redis:alpine
     command: redis-server --appendonly yes --requirepass "${REDIS_PASSWORD}"
     restart: always
@@ -55,6 +59,7 @@ services:
       - 6379:6379
   # mailhog
   mailhog:
+    container_name: mailhog
     image: mailhog/mailhog
     restart: always
     platform: linux/amd64
