@@ -1,56 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="public/images/banner.png" width="400"></a></p>
+<p align="center"><img src="public/images/logo.svg" width="150" height="150"></p>
 
-## About Laravel
+## About Sharely
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Sharely is a mini community platform to share your memories around the world. People can create their memories by posting lifestyle and share to friends also follow friend gaining some small tips to make a happier lifestyle.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Authentication and Authorization system
+- Password Reset
+- Follow and Following system
+- Like and Unlike system
+- Comment system
+- Customize User Profile system
+- Image Upload
+- Notification system
+- Email System
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Background
 
-## Learning Laravel
+The Application are develop by myself in 3 month to learning php and the framework laravel and develop it. Laravel is a really nice framework for developers like easily creating authentication system by using laravel breeze and also database's eloquent orm really save so much time. On the styling, im comfortable on tailwind css and luckily its work very well with laravel.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+That's it, im sure it was a great adventure for myself!
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Technology
 
-## Laravel Sponsors
+- [Laravel](https://laravel.com/)
+- [Tailwind](https://tailwindcss.com/)
+- [lottie](https://lottiefiles.com/)
+- [mysql](https://www.mysql.com/)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Installation
 
-### Premium Partners
+The web application need to run by [docker](https://www.docker.com/). The application is develop on apple silicon that are running arm64 if your machine is running on x86 maybe need modify docker-compose.yml and remove arm64v8 and platform linux/amd64. Be sure go check them out if you don't have them.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Usage
+
+To run the application, please following the steps:
+
+1. Clone the project
+```shell
+$ git clone https://github.com/destiny0114/nutritionx.git
+```
+
+2. Run the docker compose, before that make sure valet are disabled and stop any application that are run on port 8000
+```shell
+$ docker-compose up
+```
+
+3. Access docker container
+```shell
+$ docker exec -it app bash
+```
+
+4. Copy and create environment file
+```shell
+$ cp .env.example .env
+```
+
+5. Install dependencies
+```shell
+$ composer install && yarn install
+``` 
+
+6. Laravel commands
+```shell
+$ php artisan key:generate // generate key on application
+$ php artisan optimize // cache env file
+$ php artisan migrate // database migrate
+$ php artisan storage:link // link storage to public for access image
+```
+
+7. View the website at: http://localhost:8000. Thats it!
 
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
