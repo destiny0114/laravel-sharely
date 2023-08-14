@@ -60,12 +60,11 @@ class User extends Authenticatable
         return Attribute::set(fn($value) => Hash::make($value));
     }
 
-    protected function getBioAttribute()
+    protected function bio(): Attribute
     {
         if ($this->can("edit_profile", auth()->user())) {
-            return $this->bio ?? "Try describe yourself.";
+            return Attribute::get(fn($value) => $value ?? "Try describe yourself.");
         }
-        return $this->bio ?? null;
     }
 
     protected function getAvatarAttribute()
