@@ -65,6 +65,7 @@ class User extends Authenticatable
         if ($this->can("edit_profile", auth()->user())) {
             return Attribute::get(fn($value) => $value ?? "Try describe yourself.");
         }
+        return Attribute::get(fn($value) => $value);
     }
 
     protected function getAvatarAttribute()
