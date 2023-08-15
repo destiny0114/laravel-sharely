@@ -48,6 +48,20 @@ class ProfilesController extends Controller
 
             $user->save();
 
+            $old_notifications = $user->notifications;
+            $old_notifications->map(function ($notification) use ($user) {
+                $tmp_body = $notification['data']['body'];
+
+                $notification->update(['data' => 
+                    ['username' => $user->username,
+                    'name' => $user->name,
+                    'avatar' => $user->avatar,
+                    'body' => $tmp_body]
+                ]);
+
+                return $notification;
+            });
+
             return redirect()->route('profile', $user->username);
         } catch (FileNotFoundException $exception) {
             abort(404);
